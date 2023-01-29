@@ -1,2 +1,2 @@
-# bank-online-infrastructure
-Bank Online AWS Infrastructure with Terraform, Kubernetes and Argo CD
+# petclinic-online-infrastructure
+Petclinic Online AWS Infrastructure with Terraform
