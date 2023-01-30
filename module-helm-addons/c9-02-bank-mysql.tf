@@ -64,3 +64,21 @@ resource "kubernetes_horizontal_pod_autoscaler_v1" "bank_mysql_hpa" {
     target_cpu_utilization_percentage = 60
   }
 }
+
+# Resource: Bank MySQL Cluster IP Service
+resource "kubernetes_service_v1" "bank_mysql_service" {
+  metadata {
+    name = "bank-mysql"
+  }
+  spec {
+    selector = {
+      app = kubernetes_deployment_v1.bank_mysql_deployment.spec.0.selector.0.match_labels.app 
+    }
+    port {
+      port        = 3306 # Service Port
+      #target_port = 3306 # Container Port  # Ignored when we use cluster_ip = "None"
+    }
+    type = "ClusterIP"
+    cluster_ip = "None" # This means we are going to use Pod IP   
+  }
+}

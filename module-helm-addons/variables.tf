@@ -14,21 +14,6 @@ variable "cluster_name" {
   description = "EKS cluster name"
 }
 
-variable "vpc_id" {
-  type = string
-  description = "VPC ID"
-}
-
-variable "vpc_cidr_block" {
-  type = string
-  description = "VPC CIDR BLOCK"
-}
-
-variable "vpc_public_subnets" {
-  type  = list(string)
-  description = "VPC Public Subnets"
-}
-
 variable "environment" {
   description = "EKS Cluster Environment"
   type        = string

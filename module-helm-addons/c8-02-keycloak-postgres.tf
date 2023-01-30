@@ -23,9 +23,15 @@ resource "kubernetes_deployment_v1" "keycloak_postgres_deployment" {
         volume {
           name = "keycloak-postgres-persistent-storage"    
           persistent_volume_claim {
-            claim_name = "efs-claim" 
+            claim_name = "ebs-mysql-pv-claim"
           } 
-        }       
+        }
+        volume {
+          name = "keycloak-postgres-dbcreation-script"
+          config_map {
+            name = kubernetes_config_map_v1.keycloak_postgres_config_map.metadata.0.name 
+          }
+        }        
         container {
           name = "keycloak-postgres"
           image = "postgres:latest"
@@ -40,7 +46,11 @@ resource "kubernetes_deployment_v1" "keycloak_postgres_deployment" {
           volume_mount {
             name = "keycloak-postgres-persistent-storage"
             mount_path = "/var/lib/postgres"
-          }        
+          }
+          volume_mount {
+            name = "keycloak-postgres-dbcreation-script"
+            mount_path = "/docker-entrypoint-initdb.d"
+          }          
         }
       }
     }      

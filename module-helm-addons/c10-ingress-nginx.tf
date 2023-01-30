@@ -38,7 +38,46 @@ resource "kubernetes_ingress_v1" "ingress" {
           path_type = "Prefix"
         }
       }
-    }                  
+    }
 
+    rule {
+      host = "bank-api.greeta.net"
+      http {
+
+        path {
+          backend {
+            service {
+              name = "bank-api"
+              port {
+                number = 8081
+              }
+            }
+          }
+
+          path = "/"
+          path_type = "Prefix"
+        }
+      }
+    } 
+
+    rule {
+      host = "bank.greeta.net"
+      http {
+
+        path {
+          backend {
+            service {
+              name = "bank-ui"
+              port {
+                number = 4200
+              }
+            }
+          }
+
+          path = "/"
+          path_type = "Prefix"
+        }
+      }
+    }          
   }
 }

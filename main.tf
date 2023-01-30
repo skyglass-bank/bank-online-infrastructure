@@ -29,8 +29,5 @@ module "helm-addons" {
   domain_name                                      = "greeta.net"
   cluster_id                                       = module.eks.cluster_id
   cluster_name                                     = module.eks.cluster_name
-  vpc_id                                           = module.eks.vpc_id
-  vpc_cidr_block                                   = module.eks.vpc_cidr_block
-  vpc_public_subnets                               = module.eks.vpc_public_subnets
   ssl_certificate_arn                              = var.ssl_certificate_arn
 }
