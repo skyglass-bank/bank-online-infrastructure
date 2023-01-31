@@ -23,7 +23,7 @@ resource "kubernetes_deployment_v1" "keycloak_postgres_deployment" {
         volume {
           name = "keycloak-postgres-persistent-storage"    
           persistent_volume_claim {
-            claim_name = "ebs-mysql-pv-claim"
+            claim_name = "ebs-pv-claim"
           } 
         }
         volume {
